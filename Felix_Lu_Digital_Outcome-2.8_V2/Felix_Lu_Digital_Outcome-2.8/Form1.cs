@@ -28,7 +28,7 @@ namespace Felix_Lu_Digital_Outcome_2._8
         bool playing = false;
         string line;
         string[] data;
-        
+
         public Form1()
         {
             InitializeComponent();
