@@ -31,12 +31,11 @@
             this.buttonPlay = new System.Windows.Forms.Button();
             this.buttonGuide = new System.Windows.Forms.Button();
             this.buttonQuit = new System.Windows.Forms.Button();
-            this.buttonHelp = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // buttonPlay
             // 
-            this.buttonPlay.Location = new System.Drawing.Point(345, 184);
+            this.buttonPlay.Location = new System.Drawing.Point(971, 184);
             this.buttonPlay.Name = "buttonPlay";
             this.buttonPlay.Size = new System.Drawing.Size(75, 23);
             this.buttonPlay.TabIndex = 0;
@@ -46,7 +45,7 @@
             // 
             // buttonGuide
             // 
-            this.buttonGuide.Location = new System.Drawing.Point(345, 213);
+            this.buttonGuide.Location = new System.Drawing.Point(971, 213);
             this.buttonGuide.Name = "buttonGuide";
             this.buttonGuide.Size = new System.Drawing.Size(75, 23);
             this.buttonGuide.TabIndex = 1;
@@ -55,33 +54,28 @@
             // 
             // buttonQuit
             // 
-            this.buttonQuit.Location = new System.Drawing.Point(345, 242);
+            this.buttonQuit.Location = new System.Drawing.Point(971, 242);
             this.buttonQuit.Name = "buttonQuit";
             this.buttonQuit.Size = new System.Drawing.Size(75, 23);
             this.buttonQuit.TabIndex = 2;
             this.buttonQuit.Text = "Quit";
             this.buttonQuit.UseVisualStyleBackColor = true;
-            // 
-            // buttonHelp
-            // 
-            this.buttonHelp.Location = new System.Drawing.Point(713, 12);
-            this.buttonHelp.Name = "buttonHelp";
-            this.buttonHelp.Size = new System.Drawing.Size(75, 23);
-            this.buttonHelp.TabIndex = 3;
-            this.buttonHelp.Text = "Hint";
-            this.buttonHelp.UseVisualStyleBackColor = true;
+            this.buttonQuit.Click += new System.EventHandler(this.buttonQuit_Click);
             // 
             // Menu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.buttonHelp);
+            this.AutoSize = true;
+            this.ClientSize = new System.Drawing.Size(1924, 1055);
+            this.ControlBox = false;
             this.Controls.Add(this.buttonQuit);
             this.Controls.Add(this.buttonGuide);
             this.Controls.Add(this.buttonPlay);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Menu";
             this.Text = "Menu";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.ResumeLayout(false);
 
         }
@@ -91,6 +85,5 @@
         private System.Windows.Forms.Button buttonPlay;
         private System.Windows.Forms.Button buttonGuide;
         private System.Windows.Forms.Button buttonQuit;
-        private System.Windows.Forms.Button buttonHelp;
     }
 }
