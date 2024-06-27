@@ -43,3 +43,14 @@ C:\Users\flu2n\Source\Repos\flu2nz\Digital-Outcome-2.8\Felix_Lu_Digital_Outcome-
 C:\Users\flu2n\Source\Repos\flu2nz\Digital-Outcome-2.8\Felix_Lu_Digital_Outcome-2.8_V3\Felix_Lu_Digital_Outcome-2.8\obj\Debug\Felix_Lu_Digital_Outcome-2.8.csproj.CoreCompileInputs.cache
 C:\Users\flu2n\Source\Repos\flu2nz\Digital-Outcome-2.8\Felix_Lu_Digital_Outcome-2.8_V3\Felix_Lu_Digital_Outcome-2.8\obj\Debug\Felix_Lu_Digital_Outcome-2.8.exe
 C:\Users\flu2n\Source\Repos\flu2nz\Digital-Outcome-2.8\Felix_Lu_Digital_Outcome-2.8_V3\Felix_Lu_Digital_Outcome-2.8\obj\Debug\Felix_Lu_Digital_Outcome-2.8.pdb
+C:\Users\flu2n\Desktop\Felix's Stuff\VisualBasic\flu2nz\Digital-Outcome-2.8\Felix_Lu_Digital_Outcome-2.8_V3\Felix_Lu_Digital_Outcome-2.8\bin\Debug\Felix_Lu_Digital_Outcome-2.8.exe.config
+C:\Users\flu2n\Desktop\Felix's Stuff\VisualBasic\flu2nz\Digital-Outcome-2.8\Felix_Lu_Digital_Outcome-2.8_V3\Felix_Lu_Digital_Outcome-2.8\bin\Debug\Felix_Lu_Digital_Outcome-2.8.exe
+C:\Users\flu2n\Desktop\Felix's Stuff\VisualBasic\flu2nz\Digital-Outcome-2.8\Felix_Lu_Digital_Outcome-2.8_V3\Felix_Lu_Digital_Outcome-2.8\bin\Debug\Felix_Lu_Digital_Outcome-2.8.pdb
+C:\Users\flu2n\Desktop\Felix's Stuff\VisualBasic\flu2nz\Digital-Outcome-2.8\Felix_Lu_Digital_Outcome-2.8_V3\Felix_Lu_Digital_Outcome-2.8\obj\Debug\Felix_Lu_Digital_Outcome-2.8.csproj.AssemblyReference.cache
+C:\Users\flu2n\Desktop\Felix's Stuff\VisualBasic\flu2nz\Digital-Outcome-2.8\Felix_Lu_Digital_Outcome-2.8_V3\Felix_Lu_Digital_Outcome-2.8\obj\Debug\Felix_Lu_Digital_Outcome_2._8.Game.resources
+C:\Users\flu2n\Desktop\Felix's Stuff\VisualBasic\flu2nz\Digital-Outcome-2.8\Felix_Lu_Digital_Outcome-2.8_V3\Felix_Lu_Digital_Outcome-2.8\obj\Debug\Felix_Lu_Digital_Outcome_2._8.Menu.resources
+C:\Users\flu2n\Desktop\Felix's Stuff\VisualBasic\flu2nz\Digital-Outcome-2.8\Felix_Lu_Digital_Outcome-2.8_V3\Felix_Lu_Digital_Outcome-2.8\obj\Debug\Felix_Lu_Digital_Outcome_2._8.Properties.Resources.resources
+C:\Users\flu2n\Desktop\Felix's Stuff\VisualBasic\flu2nz\Digital-Outcome-2.8\Felix_Lu_Digital_Outcome-2.8_V3\Felix_Lu_Digital_Outcome-2.8\obj\Debug\Felix_Lu_Digital_Outcome-2.8.csproj.GenerateResource.cache
+C:\Users\flu2n\Desktop\Felix's Stuff\VisualBasic\flu2nz\Digital-Outcome-2.8\Felix_Lu_Digital_Outcome-2.8_V3\Felix_Lu_Digital_Outcome-2.8\obj\Debug\Felix_Lu_Digital_Outcome-2.8.csproj.CoreCompileInputs.cache
+C:\Users\flu2n\Desktop\Felix's Stuff\VisualBasic\flu2nz\Digital-Outcome-2.8\Felix_Lu_Digital_Outcome-2.8_V3\Felix_Lu_Digital_Outcome-2.8\obj\Debug\Felix_Lu_Digital_Outcome-2.8.exe
+C:\Users\flu2n\Desktop\Felix's Stuff\VisualBasic\flu2nz\Digital-Outcome-2.8\Felix_Lu_Digital_Outcome-2.8_V3\Felix_Lu_Digital_Outcome-2.8\obj\Debug\Felix_Lu_Digital_Outcome-2.8.pdb

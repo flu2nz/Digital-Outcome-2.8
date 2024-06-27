@@ -24,5 +24,10 @@ namespace Felix_Lu_Digital_Outcome_2._8
             Game gameWindow = new Game();
             gameWindow.Show();
         }
+
+        private void buttonQuit_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }
