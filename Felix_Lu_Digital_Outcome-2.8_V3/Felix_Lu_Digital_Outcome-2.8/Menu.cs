@@ -19,8 +19,6 @@ namespace Felix_Lu_Digital_Outcome_2._8
 
         private void buttonPlay_Click(object sender, EventArgs e)
         {
-            //Form1 gameWindow = new Form1();
-            //gameWindow.Show();
             Game gameWindow = new Game();
             gameWindow.Show();
         }

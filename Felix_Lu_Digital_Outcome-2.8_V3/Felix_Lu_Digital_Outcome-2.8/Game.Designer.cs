@@ -43,34 +43,38 @@
             this.buttonFold = new System.Windows.Forms.Button();
             this.pictureBoxP1 = new System.Windows.Forms.PictureBox();
             this.pictureBoxP2 = new System.Windows.Forms.PictureBox();
-            this.pictureBoxB1 = new System.Windows.Forms.PictureBox();
-            this.pictureBoxB2 = new System.Windows.Forms.PictureBox();
+            this.pictureBoxD2 = new System.Windows.Forms.PictureBox();
+            this.pictureBoxD1 = new System.Windows.Forms.PictureBox();
             this.pictureBoxA2 = new System.Windows.Forms.PictureBox();
             this.pictureBoxA1 = new System.Windows.Forms.PictureBox();
-            this.pictureBoxD1 = new System.Windows.Forms.PictureBox();
-            this.pictureBoxD2 = new System.Windows.Forms.PictureBox();
+            this.pictureBoxB1 = new System.Windows.Forms.PictureBox();
+            this.pictureBoxB2 = new System.Windows.Forms.PictureBox();
             this.buttonBlind = new System.Windows.Forms.Button();
             this.buttonAnteUp = new System.Windows.Forms.Button();
             this.textBoxBet = new System.Windows.Forms.TextBox();
             this.textBoxCall = new System.Windows.Forms.TextBox();
             this.textBoxPot = new System.Windows.Forms.TextBox();
             this.imageListCards = new System.Windows.Forms.ImageList(this.components);
-            this.pictureBoxB = new System.Windows.Forms.PictureBox();
-            this.pictureBoxA = new System.Windows.Forms.PictureBox();
             this.pictureBoxD = new System.Windows.Forms.PictureBox();
-            this.labelB = new System.Windows.Forms.Label();
-            this.labelA = new System.Windows.Forms.Label();
+            this.pictureBoxA = new System.Windows.Forms.PictureBox();
+            this.pictureBoxB = new System.Windows.Forms.PictureBox();
             this.labelD = new System.Windows.Forms.Label();
+            this.labelA = new System.Windows.Forms.Label();
+            this.labelB = new System.Windows.Forms.Label();
             this.labelP = new System.Windows.Forms.Label();
-            this.labelBb = new System.Windows.Forms.Label();
+            this.labelDb = new System.Windows.Forms.Label();
             this.labelAb = new System.Windows.Forms.Label();
-            this.labelCb = new System.Windows.Forms.Label();
-            this.buttonD = new System.Windows.Forms.Button();
-            this.buttonA = new System.Windows.Forms.Button();
+            this.labelBb = new System.Windows.Forms.Label();
             this.buttonB = new System.Windows.Forms.Button();
+            this.buttonA = new System.Windows.Forms.Button();
+            this.buttonD = new System.Windows.Forms.Button();
             this.buttonP = new System.Windows.Forms.Button();
             this.buttonBet = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.textBoxName = new System.Windows.Forms.TextBox();
+            this.labelName = new System.Windows.Forms.Label();
+            this.buttonName = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxC1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxC2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxC3)).BeginInit();
@@ -78,15 +82,15 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxC5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxP1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxP2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxB1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxB2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxD2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxD1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxA2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxA1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxD1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxD2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxB)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxA)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxB1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxB2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxD)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxA)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxB)).BeginInit();
             this.SuspendLayout();
             // 
             // buttonHint
@@ -231,25 +235,25 @@
             this.pictureBoxP2.TabIndex = 15;
             this.pictureBoxP2.TabStop = false;
             // 
-            // pictureBoxB1
+            // pictureBoxD2
             // 
-            this.pictureBoxB1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxB1.Image")));
-            this.pictureBoxB1.Location = new System.Drawing.Point(127, 450);
-            this.pictureBoxB1.Name = "pictureBoxB1";
-            this.pictureBoxB1.Size = new System.Drawing.Size(162, 149);
-            this.pictureBoxB1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBoxB1.TabIndex = 17;
-            this.pictureBoxB1.TabStop = false;
+            this.pictureBoxD2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxD2.Image")));
+            this.pictureBoxD2.Location = new System.Drawing.Point(127, 450);
+            this.pictureBoxD2.Name = "pictureBoxD2";
+            this.pictureBoxD2.Size = new System.Drawing.Size(162, 149);
+            this.pictureBoxD2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBoxD2.TabIndex = 17;
+            this.pictureBoxD2.TabStop = false;
             // 
-            // pictureBoxB2
+            // pictureBoxD1
             // 
-            this.pictureBoxB2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxB2.Image")));
-            this.pictureBoxB2.Location = new System.Drawing.Point(-12, 450);
-            this.pictureBoxB2.Name = "pictureBoxB2";
-            this.pictureBoxB2.Size = new System.Drawing.Size(162, 149);
-            this.pictureBoxB2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBoxB2.TabIndex = 16;
-            this.pictureBoxB2.TabStop = false;
+            this.pictureBoxD1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxD1.Image")));
+            this.pictureBoxD1.Location = new System.Drawing.Point(-12, 450);
+            this.pictureBoxD1.Name = "pictureBoxD1";
+            this.pictureBoxD1.Size = new System.Drawing.Size(162, 149);
+            this.pictureBoxD1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBoxD1.TabIndex = 16;
+            this.pictureBoxD1.TabStop = false;
             // 
             // pictureBoxA2
             // 
@@ -271,25 +275,25 @@
             this.pictureBoxA1.TabIndex = 18;
             this.pictureBoxA1.TabStop = false;
             // 
-            // pictureBoxD1
+            // pictureBoxB1
             // 
-            this.pictureBoxD1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxD1.Image")));
-            this.pictureBoxD1.Location = new System.Drawing.Point(1900, 792);
-            this.pictureBoxD1.Name = "pictureBoxD1";
-            this.pictureBoxD1.Size = new System.Drawing.Size(162, 149);
-            this.pictureBoxD1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBoxD1.TabIndex = 22;
-            this.pictureBoxD1.TabStop = false;
+            this.pictureBoxB1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxB1.Image")));
+            this.pictureBoxB1.Location = new System.Drawing.Point(1900, 792);
+            this.pictureBoxB1.Name = "pictureBoxB1";
+            this.pictureBoxB1.Size = new System.Drawing.Size(162, 149);
+            this.pictureBoxB1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBoxB1.TabIndex = 22;
+            this.pictureBoxB1.TabStop = false;
             // 
-            // pictureBoxD2
+            // pictureBoxB2
             // 
-            this.pictureBoxD2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxD2.Image")));
-            this.pictureBoxD2.Location = new System.Drawing.Point(1761, 792);
-            this.pictureBoxD2.Name = "pictureBoxD2";
-            this.pictureBoxD2.Size = new System.Drawing.Size(162, 149);
-            this.pictureBoxD2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBoxD2.TabIndex = 21;
-            this.pictureBoxD2.TabStop = false;
+            this.pictureBoxB2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxB2.Image")));
+            this.pictureBoxB2.Location = new System.Drawing.Point(1761, 792);
+            this.pictureBoxB2.Name = "pictureBoxB2";
+            this.pictureBoxB2.Size = new System.Drawing.Size(162, 149);
+            this.pictureBoxB2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBoxB2.TabIndex = 21;
+            this.pictureBoxB2.TabStop = false;
             // 
             // buttonBlind
             // 
@@ -336,7 +340,7 @@
             // 
             // textBoxPot
             // 
-            this.textBoxPot.Location = new System.Drawing.Point(921, 540);
+            this.textBoxPot.Location = new System.Drawing.Point(991, 343);
             this.textBoxPot.Name = "textBoxPot";
             this.textBoxPot.Size = new System.Drawing.Size(100, 22);
             this.textBoxPot.TabIndex = 28;
@@ -399,15 +403,15 @@
             this.imageListCards.Images.SetKeyName(51, "51.png");
             this.imageListCards.Images.SetKeyName(52, "52.png");
             // 
-            // pictureBoxB
+            // pictureBoxD
             // 
-            this.pictureBoxB.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxB.Image")));
-            this.pictureBoxB.Location = new System.Drawing.Point(12, 344);
-            this.pictureBoxB.Name = "pictureBoxB";
-            this.pictureBoxB.Size = new System.Drawing.Size(100, 100);
-            this.pictureBoxB.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBoxB.TabIndex = 29;
-            this.pictureBoxB.TabStop = false;
+            this.pictureBoxD.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxD.Image")));
+            this.pictureBoxD.Location = new System.Drawing.Point(12, 344);
+            this.pictureBoxD.Name = "pictureBoxD";
+            this.pictureBoxD.Size = new System.Drawing.Size(100, 100);
+            this.pictureBoxD.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBoxD.TabIndex = 29;
+            this.pictureBoxD.TabStop = false;
             // 
             // pictureBoxA
             // 
@@ -419,28 +423,28 @@
             this.pictureBoxA.TabIndex = 30;
             this.pictureBoxA.TabStop = false;
             // 
-            // pictureBoxD
+            // pictureBoxB
             // 
-            this.pictureBoxD.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxD.Image")));
-            this.pictureBoxD.Location = new System.Drawing.Point(1935, 950);
-            this.pictureBoxD.Name = "pictureBoxD";
-            this.pictureBoxD.Size = new System.Drawing.Size(100, 100);
-            this.pictureBoxD.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBoxD.TabIndex = 31;
-            this.pictureBoxD.TabStop = false;
+            this.pictureBoxB.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxB.Image")));
+            this.pictureBoxB.Location = new System.Drawing.Point(1935, 950);
+            this.pictureBoxB.Name = "pictureBoxB";
+            this.pictureBoxB.Size = new System.Drawing.Size(100, 100);
+            this.pictureBoxB.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBoxB.TabIndex = 31;
+            this.pictureBoxB.TabStop = false;
             // 
-            // labelB
+            // labelD
             // 
-            this.labelB.AutoSize = true;
-            this.labelB.BackColor = System.Drawing.Color.Transparent;
-            this.labelB.Font = new System.Drawing.Font("DejaVu Sans Condensed", 16.2F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelB.ForeColor = System.Drawing.Color.White;
-            this.labelB.Location = new System.Drawing.Point(119, 344);
-            this.labelB.Name = "labelB";
-            this.labelB.Size = new System.Drawing.Size(86, 33);
-            this.labelB.TabIndex = 32;
-            this.labelB.Text = "J.Cole";
-            this.labelB.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.labelD.AutoSize = true;
+            this.labelD.BackColor = System.Drawing.Color.Transparent;
+            this.labelD.Font = new System.Drawing.Font("DejaVu Sans Condensed", 16.2F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelD.ForeColor = System.Drawing.Color.White;
+            this.labelD.Location = new System.Drawing.Point(119, 344);
+            this.labelD.Name = "labelD";
+            this.labelD.Size = new System.Drawing.Size(86, 33);
+            this.labelD.TabIndex = 32;
+            this.labelD.Text = "J.Cole";
+            this.labelD.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // labelA
             // 
@@ -456,19 +460,19 @@
             this.labelA.Text = "D.Carter";
             this.labelA.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // labelD
+            // labelB
             // 
-            this.labelD.AutoSize = true;
-            this.labelD.BackColor = System.Drawing.Color.Transparent;
-            this.labelD.Font = new System.Drawing.Font("DejaVu Sans Condensed", 16.2F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelD.ForeColor = System.Drawing.Color.White;
-            this.labelD.Location = new System.Drawing.Point(1787, 1014);
-            this.labelD.Name = "labelD";
-            this.labelD.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.labelD.Size = new System.Drawing.Size(136, 33);
-            this.labelD.TabIndex = 34;
-            this.labelD.Text = "J.Webster";
-            this.labelD.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.labelB.AutoSize = true;
+            this.labelB.BackColor = System.Drawing.Color.Transparent;
+            this.labelB.Font = new System.Drawing.Font("DejaVu Sans Condensed", 16.2F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelB.ForeColor = System.Drawing.Color.White;
+            this.labelB.Location = new System.Drawing.Point(1787, 1014);
+            this.labelB.Name = "labelB";
+            this.labelB.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.labelB.Size = new System.Drawing.Size(136, 33);
+            this.labelB.TabIndex = 34;
+            this.labelB.Text = "J.Webster";
+            this.labelB.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // labelP
             // 
@@ -476,24 +480,24 @@
             this.labelP.BackColor = System.Drawing.Color.Transparent;
             this.labelP.Font = new System.Drawing.Font("DejaVu Sans Condensed", 19.8F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelP.ForeColor = System.Drawing.Color.White;
-            this.labelP.Location = new System.Drawing.Point(379, 943);
+            this.labelP.Location = new System.Drawing.Point(379, 902);
             this.labelP.Name = "labelP";
             this.labelP.Size = new System.Drawing.Size(119, 39);
             this.labelP.TabIndex = 35;
             this.labelP.Text = "label1";
             this.labelP.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // labelBb
+            // labelDb
             // 
-            this.labelBb.BackColor = System.Drawing.Color.Transparent;
-            this.labelBb.Font = new System.Drawing.Font("DejaVu Sans Condensed", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelBb.ForeColor = System.Drawing.Color.White;
-            this.labelBb.Location = new System.Drawing.Point(121, 377);
-            this.labelBb.Name = "labelBb";
-            this.labelBb.Size = new System.Drawing.Size(168, 33);
-            this.labelBb.TabIndex = 36;
-            this.labelBb.Text = "label1";
-            this.labelBb.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.labelDb.BackColor = System.Drawing.Color.Transparent;
+            this.labelDb.Font = new System.Drawing.Font("DejaVu Sans Condensed", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelDb.ForeColor = System.Drawing.Color.White;
+            this.labelDb.Location = new System.Drawing.Point(121, 377);
+            this.labelDb.Name = "labelDb";
+            this.labelDb.Size = new System.Drawing.Size(168, 33);
+            this.labelDb.TabIndex = 36;
+            this.labelDb.Text = "label1";
+            this.labelDb.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // labelAb
             // 
@@ -508,26 +512,26 @@
             this.labelAb.Text = "label1";
             this.labelAb.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // labelCb
+            // labelBb
             // 
-            this.labelCb.BackColor = System.Drawing.Color.Transparent;
-            this.labelCb.Font = new System.Drawing.Font("DejaVu Sans Condensed", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelCb.ForeColor = System.Drawing.Color.White;
-            this.labelCb.Location = new System.Drawing.Point(1765, 990);
-            this.labelCb.Name = "labelCb";
-            this.labelCb.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.labelCb.Size = new System.Drawing.Size(158, 24);
-            this.labelCb.TabIndex = 38;
-            this.labelCb.Text = "label1";
-            this.labelCb.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.labelBb.BackColor = System.Drawing.Color.Transparent;
+            this.labelBb.Font = new System.Drawing.Font("DejaVu Sans Condensed", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelBb.ForeColor = System.Drawing.Color.White;
+            this.labelBb.Location = new System.Drawing.Point(1765, 990);
+            this.labelBb.Name = "labelBb";
+            this.labelBb.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.labelBb.Size = new System.Drawing.Size(158, 24);
+            this.labelBb.TabIndex = 38;
+            this.labelBb.Text = "label1";
+            this.labelBb.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // buttonD
+            // buttonB
             // 
-            this.buttonD.Location = new System.Drawing.Point(1761, 947);
-            this.buttonD.Name = "buttonD";
-            this.buttonD.Size = new System.Drawing.Size(162, 40);
-            this.buttonD.TabIndex = 39;
-            this.buttonD.UseVisualStyleBackColor = true;
+            this.buttonB.Location = new System.Drawing.Point(1761, 947);
+            this.buttonB.Name = "buttonB";
+            this.buttonB.Size = new System.Drawing.Size(162, 40);
+            this.buttonB.TabIndex = 39;
+            this.buttonB.UseVisualStyleBackColor = true;
             // 
             // buttonA
             // 
@@ -537,17 +541,17 @@
             this.buttonA.TabIndex = 40;
             this.buttonA.UseVisualStyleBackColor = true;
             // 
-            // buttonB
+            // buttonD
             // 
-            this.buttonB.BackColor = System.Drawing.Color.Green;
-            this.buttonB.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.buttonB.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.buttonB.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.buttonB.Location = new System.Drawing.Point(125, 404);
-            this.buttonB.Name = "buttonB";
-            this.buttonB.Size = new System.Drawing.Size(162, 40);
-            this.buttonB.TabIndex = 41;
-            this.buttonB.UseVisualStyleBackColor = false;
+            this.buttonD.BackColor = System.Drawing.Color.Green;
+            this.buttonD.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.buttonD.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.buttonD.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.buttonD.Location = new System.Drawing.Point(125, 404);
+            this.buttonD.Name = "buttonD";
+            this.buttonD.Size = new System.Drawing.Size(162, 40);
+            this.buttonD.TabIndex = 41;
+            this.buttonD.UseVisualStyleBackColor = false;
             // 
             // buttonP
             // 
@@ -556,12 +560,11 @@
             this.buttonP.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.buttonP.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.buttonP.Font = new System.Drawing.Font("Modern No. 20", 13.8F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonP.Location = new System.Drawing.Point(379, 890);
+            this.buttonP.Location = new System.Drawing.Point(379, 849);
             this.buttonP.Name = "buttonP";
             this.buttonP.Size = new System.Drawing.Size(218, 50);
             this.buttonP.TabIndex = 24;
             this.buttonP.UseVisualStyleBackColor = false;
-            this.buttonP.Visible = false;
             // 
             // buttonBet
             // 
@@ -587,6 +590,49 @@
             this.label1.TabIndex = 43;
             this.label1.Text = "Call:";
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.ForeColor = System.Drawing.Color.White;
+            this.label2.Location = new System.Drawing.Point(955, 346);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(30, 16);
+            this.label2.TabIndex = 44;
+            this.label2.Text = "Pot:";
+            // 
+            // textBoxName
+            // 
+            this.textBoxName.Location = new System.Drawing.Point(906, 770);
+            this.textBoxName.Name = "textBoxName";
+            this.textBoxName.Size = new System.Drawing.Size(270, 22);
+            this.textBoxName.TabIndex = 45;
+            this.textBoxName.Text = "Please Enter a Name";
+            this.textBoxName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.textBoxName.Click += new System.EventHandler(this.EventClick);
+            // 
+            // labelName
+            // 
+            this.labelName.AutoSize = true;
+            this.labelName.BackColor = System.Drawing.Color.Transparent;
+            this.labelName.Font = new System.Drawing.Font("DejaVu Sans Condensed", 16.2F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelName.ForeColor = System.Drawing.Color.White;
+            this.labelName.Location = new System.Drawing.Point(379, 941);
+            this.labelName.Name = "labelName";
+            this.labelName.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.labelName.Size = new System.Drawing.Size(0, 33);
+            this.labelName.TabIndex = 46;
+            this.labelName.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // buttonName
+            // 
+            this.buttonName.Location = new System.Drawing.Point(1003, 798);
+            this.buttonName.Name = "buttonName";
+            this.buttonName.Size = new System.Drawing.Size(75, 23);
+            this.buttonName.TabIndex = 47;
+            this.buttonName.Text = "Enter";
+            this.buttonName.UseVisualStyleBackColor = true;
+            this.buttonName.Click += new System.EventHandler(this.buttonName_Click);
+            // 
             // Game
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -594,33 +640,37 @@
             this.BackColor = System.Drawing.Color.Green;
             this.ClientSize = new System.Drawing.Size(1942, 1102);
             this.ControlBox = false;
+            this.Controls.Add(this.buttonName);
+            this.Controls.Add(this.labelName);
+            this.Controls.Add(this.textBoxName);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.buttonBet);
             this.Controls.Add(this.buttonP);
-            this.Controls.Add(this.buttonB);
-            this.Controls.Add(this.buttonA);
             this.Controls.Add(this.buttonD);
-            this.Controls.Add(this.labelCb);
-            this.Controls.Add(this.labelAb);
+            this.Controls.Add(this.buttonA);
+            this.Controls.Add(this.buttonB);
             this.Controls.Add(this.labelBb);
+            this.Controls.Add(this.labelAb);
+            this.Controls.Add(this.labelDb);
             this.Controls.Add(this.labelP);
-            this.Controls.Add(this.labelD);
-            this.Controls.Add(this.labelA);
             this.Controls.Add(this.labelB);
-            this.Controls.Add(this.pictureBoxD);
-            this.Controls.Add(this.pictureBoxA);
+            this.Controls.Add(this.labelA);
+            this.Controls.Add(this.labelD);
             this.Controls.Add(this.pictureBoxB);
+            this.Controls.Add(this.pictureBoxA);
+            this.Controls.Add(this.pictureBoxD);
             this.Controls.Add(this.textBoxPot);
             this.Controls.Add(this.textBoxCall);
             this.Controls.Add(this.textBoxBet);
             this.Controls.Add(this.buttonAnteUp);
             this.Controls.Add(this.buttonBlind);
-            this.Controls.Add(this.pictureBoxD1);
-            this.Controls.Add(this.pictureBoxD2);
-            this.Controls.Add(this.pictureBoxA2);
-            this.Controls.Add(this.pictureBoxA1);
             this.Controls.Add(this.pictureBoxB1);
             this.Controls.Add(this.pictureBoxB2);
+            this.Controls.Add(this.pictureBoxA2);
+            this.Controls.Add(this.pictureBoxA1);
+            this.Controls.Add(this.pictureBoxD2);
+            this.Controls.Add(this.pictureBoxD1);
             this.Controls.Add(this.pictureBoxP2);
             this.Controls.Add(this.pictureBoxP1);
             this.Controls.Add(this.buttonFold);
@@ -645,15 +695,15 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxC5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxP1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxP2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxB1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxB2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxD2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxD1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxA2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxA1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxD1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxD2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxB)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxA)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxB1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxB2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxD)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxA)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxB)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -673,33 +723,37 @@
         private System.Windows.Forms.Button buttonFold;
         private System.Windows.Forms.PictureBox pictureBoxP1;
         private System.Windows.Forms.PictureBox pictureBoxP2;
-        private System.Windows.Forms.PictureBox pictureBoxB1;
-        private System.Windows.Forms.PictureBox pictureBoxB2;
+        private System.Windows.Forms.PictureBox pictureBoxD2;
+        private System.Windows.Forms.PictureBox pictureBoxD1;
         private System.Windows.Forms.PictureBox pictureBoxA2;
         private System.Windows.Forms.PictureBox pictureBoxA1;
-        private System.Windows.Forms.PictureBox pictureBoxD1;
-        private System.Windows.Forms.PictureBox pictureBoxD2;
+        private System.Windows.Forms.PictureBox pictureBoxB1;
+        private System.Windows.Forms.PictureBox pictureBoxB2;
         private System.Windows.Forms.Button buttonBlind;
         private System.Windows.Forms.Button buttonAnteUp;
         private System.Windows.Forms.TextBox textBoxBet;
         private System.Windows.Forms.TextBox textBoxCall;
         private System.Windows.Forms.TextBox textBoxPot;
         private System.Windows.Forms.ImageList imageListCards;
-        private System.Windows.Forms.PictureBox pictureBoxB;
-        private System.Windows.Forms.PictureBox pictureBoxA;
         private System.Windows.Forms.PictureBox pictureBoxD;
-        private System.Windows.Forms.Label labelB;
-        private System.Windows.Forms.Label labelA;
+        private System.Windows.Forms.PictureBox pictureBoxA;
+        private System.Windows.Forms.PictureBox pictureBoxB;
         private System.Windows.Forms.Label labelD;
+        private System.Windows.Forms.Label labelA;
+        private System.Windows.Forms.Label labelB;
         private System.Windows.Forms.Label labelP;
-        private System.Windows.Forms.Label labelBb;
+        private System.Windows.Forms.Label labelDb;
         private System.Windows.Forms.Label labelAb;
-        private System.Windows.Forms.Label labelCb;
-        private System.Windows.Forms.Button buttonD;
-        private System.Windows.Forms.Button buttonA;
+        private System.Windows.Forms.Label labelBb;
         private System.Windows.Forms.Button buttonB;
+        private System.Windows.Forms.Button buttonA;
+        private System.Windows.Forms.Button buttonD;
         private System.Windows.Forms.Button buttonP;
         private System.Windows.Forms.Button buttonBet;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox textBoxName;
+        private System.Windows.Forms.Label labelName;
+        private System.Windows.Forms.Button buttonName;
     }
 }
