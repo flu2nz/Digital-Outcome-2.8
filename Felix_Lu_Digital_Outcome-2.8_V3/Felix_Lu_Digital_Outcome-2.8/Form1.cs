@@ -742,45 +742,45 @@ namespace Felix_Lu_Digital_Outcome_2._8
             string hand;
             if (communityCards.Count() == 5)
             {
-                buttonCall.Enabled = false;
-                buttonRaise.Enabled = false;
-                buttonFold.Enabled = false;
-                buttonAllIn.Enabled = false;
-                if (pPlaying == true)
-                {
-                    playerRank = Showdown(playerHand);
-                    opponentRank = Showdown(opponentHand);
-                    if (playerRank > opponentRank)
-                    {
-                        hand = FiveCardHand(playerRank);
-                        MessageBox.Show($"You win with a " + hand + '.');
-                        playerBank += pot;
-                    }
-                    else if (playerRank == opponentRank)
-                    {
-                        hand = FiveCardHand(playerRank);
-                        MessageBox.Show($"It's a draw, " + hand +".");
-                        playerBank += pot/2;
-                        opBank += pot / 2;
-                    }
-                    else
-                    {
-                        hand = FiveCardHand(opponentRank);
-                        MessageBox.Show($"You Lost to a " + hand + '.');
-                        opBank += pot;
-                    }
-                }
-                else
-                {
-                    opponentRank = Showdown(opponentHand);
-                    hand = FiveCardHand(opponentRank);
-                    MessageBox.Show("You have discarded your hand.\n" + "The opponent has a " + hand);
-                    textBoxBank.Text = $"{playerBank}";
-                }
-                textBoxBank.Text = $"{playerBank}";
-                textBoxPot.Clear();
-                textBoxBet.Clear();
-                buttonPlay.Enabled = true;
+                //buttonCall.Enabled = false;
+                //buttonRaise.Enabled = false;
+                //buttonFold.Enabled = false;
+                //buttonAllIn.Enabled = false;
+                //if (pPlaying == true)
+                //{
+                //    playerRank = Showdown(playerHand);
+                //    opponentRank = Showdown(opponentHand);
+                //    if (playerRank > opponentRank)
+                //    {
+                //        hand = FiveCardHand(playerRank);
+                //        MessageBox.Show($"You win with a " + hand + '.');
+                //        playerBank += pot;
+                //    }
+                //    else if (playerRank == opponentRank)
+                //    {
+                //        hand = FiveCardHand(playerRank);
+                //        MessageBox.Show($"It's a draw, " + hand +".");
+                //        playerBank += pot/2;
+                //        opBank += pot / 2;
+                //    }
+                //    else
+                //    {
+                //        hand = FiveCardHand(opponentRank);
+                //        MessageBox.Show($"You Lost to a " + hand + '.');
+                //        opBank += pot;
+                //    }
+                //}
+                //else
+                //{
+                //    opponentRank = Showdown(opponentHand);
+                //    hand = FiveCardHand(opponentRank);
+                //    MessageBox.Show("You have discarded your hand.\n" + "The opponent has a " + hand);
+                //    textBoxBank.Text = $"{playerBank}";
+                //}
+                //textBoxBank.Text = $"{playerBank}";
+                //textBoxPot.Clear();
+                //textBoxBet.Clear();
+                //buttonPlay.Enabled = true;
             }
         }
     }
