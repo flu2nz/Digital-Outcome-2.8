@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics.Eventing.Reader;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Reflection.Emit;
 using System.Runtime.CompilerServices;
 using System.Security.Policy;
 using System.Text;
@@ -18,7 +20,7 @@ namespace Felix_Lu_Digital_Outcome_2._8
     {
         //Declare Constants
         const int HOLECARDS = 2;
-        const int MONEY = 2000;
+        const int MONEY = 5000;
         const int MINBET = 100;
         //Declare RNG
         Random rand = new Random();
@@ -31,7 +33,10 @@ namespace Felix_Lu_Digital_Outcome_2._8
         List<int> dH = new List<int>();
         HashSet<int> distinct = new HashSet<int>();
         HashSet<int> duplicate = new HashSet<int>();
-        List<int> dupDup = new List<int>();
+        List<string> facts = new List<string>();
+        List<int> players = new List<int>();
+        List<int> playerTie = new List<int>();
+        List<int> tied = new List<int>();
         //Declare Varaibles
         bool aPlaying = false;
         bool pPlaying = false;
@@ -49,18 +54,16 @@ namespace Felix_Lu_Digital_Outcome_2._8
         bool prebet = false;
         bool skip = false;
         bool warned = false;
-        bool hc = false;
         int cLikes = 0;
-        int cOne = 0;
-        int cTwo = 0;
-        int tp = 0;
-        int player = 0;
         string name;
+        int width;
+        int height;
+        int fact;
 
         List<Card> card = new List<Card>();
         List<string> imageLocation = new List<string>();
         int xPos = 1185;
-        int test = 7;
+        //int test = 7;
         int yPos = 50;
         public Game()
         {
@@ -70,6 +73,7 @@ namespace Felix_Lu_Digital_Outcome_2._8
         }
         private void GameStart()
         {
+            int bank;
             if (pBank < 50)
             {
                 MessageBox.Show("You have insufficient funds to participate in another game you need a minimum of $50 to participate.\nPlease come back when you have sufficient funds.");
@@ -81,7 +85,6 @@ namespace Felix_Lu_Digital_Outcome_2._8
                 buttonB.Text = null;
                 buttonD.Text = null;
                 buttonP.Text = null;
-                hc = false;
                 skip = false;
                 prebet = true;
                 warned = false;
@@ -91,14 +94,28 @@ namespace Felix_Lu_Digital_Outcome_2._8
                 buttonRaise.Enabled = false;
                 buttonFold.Enabled = false;
                 buttonAllIn.Enabled = false;
-                if (aBank < pBank)
+                if (aBank == 0)
                 {
-                    aBank = pBank / 95 * 100;
+                    bank = rand.Next(0, 11);
+                    aBank = pBank * (95 + bank) / 100;
+                }
+                if (bBank == 0)
+                {
+                    bank = rand.Next(0, 11);
+                    bBank = pBank * (95 + bank) / 100;
+                }
+                if (dBank == 0)
+                {
+                    bank = rand.Next(0, 11);
+                    dBank = pBank * (95 + bank) / 100;
                 }
                 pH.Clear();
                 aH.Clear();
                 bH.Clear();
                 dH.Clear();
+                players.Clear();
+                playerTie.Clear();
+                tied.Clear();
                 distinct.Clear();
                 duplicate.Clear();
                 cards.Clear();
@@ -109,10 +126,6 @@ namespace Felix_Lu_Digital_Outcome_2._8
                 call = MINBET / 2;
                 pot = 0;
                 cLikes = 0;
-                cOne = 0;
-                cTwo = 0;
-                tp = 0;
-                player = 0;
                 textBoxBet.ReadOnly = false;
                 pictureBoxP1.Image = imageListCards.Images[52];
                 pictureBoxP2.Image = imageListCards.Images[52];
@@ -127,8 +140,9 @@ namespace Felix_Lu_Digital_Outcome_2._8
                 pictureBoxB2.Image = imageListCards.Images[52];
                 pictureBoxD1.Image = imageListCards.Images[52];
                 pictureBoxD2.Image = imageListCards.Images[52];
-                labelP.Text = $"{pBank}";
-                labelAb.Text = $"{aBank}";
+                labelAb.Text = $"${aBank}";
+                labelBb.Text = $"${bBank}";
+                labelDb.Text = $"${dBank}";
                 using (StreamReader reader = new StreamReader("2.8_Card_Data.csv"))
                 {
                     while ((line = reader.ReadLine()) != null)
@@ -137,24 +151,53 @@ namespace Felix_Lu_Digital_Outcome_2._8
                         cards.Add(Convert.ToInt32(data[0]));
                     }
                 }
-                //System.Threading.Thread.Sleep(500);
             }
         }
         private void SetupApp()
         {
+            using (StreamReader reader = new StreamReader("Animal_Facts.csv"))
+            {
+                while ((line = reader.ReadLine()) != null)
+                {
+                    facts.Add(line);
+                }
+            }
+            height = System.Windows.Forms.SystemInformation.PrimaryMonitorSize.Height;
+            width = System.Windows.Forms.SystemInformation.PrimaryMonitorSize.Width;
+            buttonHint.Location = new Point(width - 65, 10);
             imageLocation = Directory.GetFiles("Sprites", "*png").ToList();
             for (int i = 0; i < 53; i++)
             {
                 MakeCards();
             }
+            buttonBlind.Enabled = false;
+            buttonAnteUp.Enabled = false;
         }
         private void buttonName_Click(object sender, EventArgs e)
         {
-            name = textBoxName.Text;
-            labelName.Text = name;
-            textBoxName.Hide();
-            buttonName.Hide();
-            aBet();
+            if (textBoxName.Text == "Please Enter a Name")
+            {
+                MessageBox.Show("Please enter a name.");
+            }
+            else
+            {
+                if (textBoxName.Text == null || textBoxName.Text == "")
+                {
+                    MessageBox.Show("Please enter a name.");
+                }
+                else
+                {
+                    name = textBoxName.Text;
+                    labelN.Text = name;
+                    textBoxName.Hide();
+                    buttonName.Hide();
+                    buttonBlind.Enabled = true;
+                    buttonAnteUp.Enabled = true;
+                    labelP.Text = $"${pBank}";
+                    aBet();
+                }
+
+            }
         }
         private void EventClick(object sender, EventArgs e)
         {
@@ -162,7 +205,6 @@ namespace Felix_Lu_Digital_Outcome_2._8
         }
         private void MakeCards()
         {
-            //cardNumber++;
             Card newCard = new Card(imageLocation[52]);
             newCard.position.X = xPos;
             newCard.position.Y = yPos;
@@ -180,7 +222,8 @@ namespace Felix_Lu_Digital_Outcome_2._8
         }
         private void buttonHint_Click(object sender, EventArgs e)
         {
-
+            Hint HintWindow = new Hint();
+            HintWindow.Show();
         }
 
         private void buttonMenu_Click(object sender, EventArgs e)
@@ -195,14 +238,34 @@ namespace Felix_Lu_Digital_Outcome_2._8
             buttonBlind.Hide();
             buttonAnteUp.Hide();
             buttonP.Text = " Blind ";
-            labelP.Text = $"{pBank}";
+            labelP.Text = $"${pBank}";
             textBoxCall.Text = $"{call}";
             if (pBank == 0)
             {
                 skip = true;
             }
-            //System.Threading.Thread.Sleep(500);
-            dBet();
+            if (dPlaying == true)
+            {
+                dBet();
+            }
+            else
+            {
+                if (prebet == true)
+                {
+                    DealHands();
+                }
+                else
+                {
+                    if (communityCards.Count() != 5)
+                    {
+                        Action();
+                    }
+                    else
+                    {
+                        EndRound();
+                    }
+                }
+            }
         }
         private void buttonAnteUp_Click(object sender, EventArgs e)
         {
@@ -210,7 +273,7 @@ namespace Felix_Lu_Digital_Outcome_2._8
             buttonBet.Show();
             if (pBank < call)
             {
-                textBoxBet.Text = $"{pBank}";
+                textBoxBet.Text = $"${pBank}";
                 textBoxBet.ReadOnly = true;
             }
         }
@@ -237,24 +300,43 @@ namespace Felix_Lu_Digital_Outcome_2._8
                             pBank = 0;
                             buttonBlind.Hide();
                             buttonAnteUp.Hide();
-                            buttonP.Text = "Ante Up";
-                            labelP.Text = $"{pBank}";
+                            buttonP.Text = "Ante Up ";
+                            labelP.Text = $"${pBank}";
                             textBoxCall.Text = $"{call}";
                             skip = true;
                         }
                         else
                         {
-                            //call = bet;
                             pBank -= bet;
                             pot += bet;
                             buttonBlind.Hide();
                             buttonAnteUp.Hide();
-                            buttonP.Text = "Ante Up";
-                            labelP.Text = $"{pBank}";
+                            buttonP.Text = " Ante Up ";
+                            labelP.Text = $"${pBank}";
                             //textBoxCall.Text = $"{call}";
                         }
-                        //System.Threading.Thread.Sleep(500);
-                        dBet();
+                        if (dPlaying == true)
+                        {
+                            dBet();
+                        }
+                        else
+                        {
+                            if (prebet == true)
+                            {
+                                DealHands();
+                            }
+                            else
+                            {
+                                if (communityCards.Count() != 5)
+                                {
+                                    Action();
+                                }
+                                else
+                                {
+                                    EndRound();
+                                }
+                            }
+                        }
                     }
                 }
                 else
@@ -275,11 +357,31 @@ namespace Felix_Lu_Digital_Outcome_2._8
                             pBank = 0;
                             pot += bet;
                             skip = true;
-                            buttonP.Text = "Raise";
-                            labelP.Text = $"{pBank}";
+                            buttonP.Text = " Raise ";
+                            labelP.Text = $"${pBank}";
                             textBoxCall.Text = $"{call}";
-                            //System.Threading.Thread.Sleep(500);
-                            dBet();
+                            if (dPlaying == true)
+                            {
+                                dBet();
+                            }
+                            else
+                            {
+                                if (prebet == true)
+                                {
+                                    DealHands();
+                                }
+                                else
+                                {
+                                    if (communityCards.Count() != 5)
+                                    {
+                                        Action();
+                                    }
+                                    else
+                                    {
+                                        EndRound();
+                                    }
+                                }
+                            }
                         }
                     }
                     else if (bet > pBank)
@@ -296,8 +398,8 @@ namespace Felix_Lu_Digital_Outcome_2._8
                             pBank = 0;
                             buttonBlind.Hide();
                             buttonAnteUp.Hide();
-                            buttonP.Text = "Raise";
-                            labelP.Text = $"{pBank}";
+                            buttonP.Text = " Raise ";
+                            labelP.Text = $"${pBank}";
                             textBoxCall.Text = $"{call}";
                             skip = true;
                         }
@@ -308,12 +410,32 @@ namespace Felix_Lu_Digital_Outcome_2._8
                             pot += call;
                             buttonBlind.Hide();
                             buttonAnteUp.Hide();
-                            buttonP.Text = "Raise";
-                            labelP.Text = $"{pBank}";
+                            buttonP.Text = " Raise ";
+                            labelP.Text = $"${pBank}";
                             textBoxCall.Text = $"{call}";
                         }
-                        //System.Threading.Thread.Sleep(500);
-                        dBet();
+                        if (dPlaying == true)
+                        {
+                            dBet();
+                        }
+                        else
+                        {
+                            if (prebet == true)
+                            {
+                                DealHands();
+                            }
+                            else
+                            {
+                                if (communityCards.Count() != 5)
+                                {
+                                    Action();
+                                }
+                                else
+                                {
+                                    EndRound();
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -336,10 +458,30 @@ namespace Felix_Lu_Digital_Outcome_2._8
                 pot += call;
             }
             textBoxCall.Text = $"{call}";
-            buttonP.Text = "Call";
-            labelP.Text = $"{pBank}";
-            //System.Threading.Thread.Sleep(500);
-            dBet();
+            buttonP.Text = " Call ";
+            labelP.Text = $"${pBank}";
+            if (dPlaying == true)
+            {
+                dBet();
+            }
+            else
+            {
+                if (prebet == true)
+                {
+                    DealHands();
+                }
+                else
+                {
+                    if (communityCards.Count() != 5)
+                    {
+                        Action();
+                    }
+                    else
+                    {
+                        EndRound();
+                    }
+                }
+            }
         }
         private void buttonRaise_Click(object sender, EventArgs e)
         {
@@ -347,7 +489,7 @@ namespace Felix_Lu_Digital_Outcome_2._8
             buttonBet.Show();
             if (pBank < call)
             {
-                textBoxBet.Text = $"{pBank}";
+                textBoxBet.Text = $"${pBank}";
                 textBoxBet.ReadOnly = true;
             }
         }
@@ -355,9 +497,29 @@ namespace Felix_Lu_Digital_Outcome_2._8
         {
             pPlaying = false;
             skip = true;
-            buttonP.Text = "Fold";
-            //System.Threading.Thread.Sleep(500);
-            dBet();
+            buttonP.Text = " Fold ";
+            if (dPlaying == true)
+            {
+                dBet();
+            }
+            else
+            {
+                if (prebet == true)
+                {
+                    DealHands();
+                }
+                else
+                {
+                    if (communityCards.Count() != 5)
+                    {
+                        Action();
+                    }
+                    else
+                    {
+                        EndRound();
+                    }
+                }
+            }
         }
         private void buttonAllIn_Click(object sender, EventArgs e)
         {
@@ -365,34 +527,54 @@ namespace Felix_Lu_Digital_Outcome_2._8
             pBank = 0;
             pot += call;
             skip = true;
-            labelP.Text = $"{pBank}";
+            labelP.Text = $"${pBank}";
             textBoxCall.Text = $"{call}";
-            buttonP.Text = "All In";
-            //System.Threading.Thread.Sleep(500);
-            dBet();
+            buttonP.Text = " All In ";
+            if (dPlaying == true)
+            {
+                dBet();
+            }
+            else
+            {
+                if (prebet == true)
+                {
+                    DealHands();
+                }
+                else
+                {
+                    if (communityCards.Count() != 5)
+                    {
+                        Action();
+                    }
+                    else
+                    {
+                        EndRound();
+                    }
+                }
+            }
         }
         private void aBet()
         {
-            //buttonA.Text = null;
-            //buttonB.Text = null;
-            //buttonD.Text = null;
-            //if (pPlaying == true)
-            //{
-            //    buttonP.Text = null;
-            //}
             int action;
             int raise;
+            int bet = call;
             action = rand.Next(0, 4);
             raise = rand.Next(0, 11);
             if (prebet == true)
             {
-                if (action < 3)
+                if (aBank < call)
+                {
+                    buttonA.Text = " Blind ";
+                    bet = aBank;
+                    aPlaying = false;
+                }
+                else if (action < 3)
                 {
                     buttonA.Text = " Blind ";
                 }
                 else
                 {
-                    call += raise * 5;
+                    bet = call + raise * 5;
                     buttonA.Text = " Ante Up ";
                 }
             }
@@ -400,35 +582,83 @@ namespace Felix_Lu_Digital_Outcome_2._8
             {
                 if (aPlaying == true)
                 {
-                    if (action < 3)
+                    if (aBank < call)
+                    {
+                        buttonA.Text = " Blind ";
+                        bet = aBank;
+                        aPlaying = false;
+                    }
+                    else if (action < 3)
                     {
                         buttonA.Text = " Call ";
                     }
                     else
                     {
-                        call += raise * 10;
+                        bet = call + raise * 10;
                         buttonA.Text = " Raise ";
                     }
                 }
             }
-            aBank -= call;
-            pot += call;
+            aBank -= bet;
+            if(bet > call)
+            {
+                call = bet;
+            }
+            pot += bet;
             textBoxPot.Text = $"{pot}";
-            labelAb.Text = $"{aBank}";
+            labelAb.Text = $"${aBank}";
             textBoxCall.Text = $"{call}";
-            //System.Threading.Thread.Sleep(500);
-            bBet();
+            if (bPlaying == true)
+            {
+                bBet();
+            }
+            else if(pPlaying == true && skip == false)
+            {
+                buttonP.Text = null;
+                buttonCall.Enabled = true;
+                buttonRaise.Enabled = true;
+                buttonFold.Enabled = true;
+                buttonAllIn.Enabled = true;
+            }
+            else if (dPlaying == true)
+            {
+                dBet();
+            }
+            else
+            {
+                if (prebet == true)
+                {
+                    DealHands();
+                }
+                else
+                {
+                    if (communityCards.Count() != 5)
+                    {
+                        Action();
+                    }
+                    else
+                    {
+                        EndRound();
+                    }
+                }
+            }
         }
         private void bBet()
         {
-            //buttonB.Text = null;
             int action;
             int raise;
+            int bet = call;
             action = rand.Next(0, 4);
             raise = rand.Next(0, 11);
             if (prebet == true)
             {
-                if (action < 3)
+                if (bBank < call)
+                {
+                    buttonB.Text = " Blind ";
+                    bet = bBank;
+                    bPlaying = false;
+                }
+                else if (action < 3)
                 {
                     buttonB.Text = " Blind ";
                 }
@@ -437,55 +667,87 @@ namespace Felix_Lu_Digital_Outcome_2._8
                     call += raise * 5;
                     buttonB.Text = " Ante Up ";
                 }
-                bBank -= call;
-                pot += call;
-                textBoxPot.Text = $"{pot}";
-                labelBb.Text = $"{bBank}";
-                textBoxCall.Text = $"{call}";
             }
             else
             {
                 if (bPlaying == true)
                 {
-                    if (action < 3)
+                    if (bBank < call)
                     {
-                        buttonB.Text = " Call ";
+                        buttonB.Text = " Blind ";
+                        bet = bBank;
+                        bPlaying = false;
+                    }
+                    else if (action < 3)
+                    {
+                        buttonB.Text = " Blind ";
                     }
                     else
                     {
                         call += raise * 10;
                         buttonB.Text = " Raise ";
                     }
-                    bBank -= call;
-                    pot += call;
-                    textBoxPot.Text = $"{pot}";
-                    labelBb.Text = $"{bBank}";
-                    textBoxCall.Text = $"{call}";
                 }
             }
-            //System.Threading.Thread.Sleep(500);
-            buttonP.Text = null;
-            buttonCall.Enabled = true;
-            buttonRaise.Enabled = true;
-            buttonFold.Enabled = true;
-            buttonAllIn.Enabled = true;
+            bBank -= bet;
+            if (bet > call)
+            {
+                call = bet;
+            }
+            pot += bet;
+            textBoxPot.Text = $"{pot}";
+            labelBb.Text = $"${bBank}";
+            textBoxCall.Text = $"{call}";
+            if (pPlaying == true && skip == false)
+            {
+                buttonP.Text = null;
+                buttonCall.Enabled = true;
+                buttonRaise.Enabled = true;
+                buttonFold.Enabled = true;
+                buttonAllIn.Enabled = true;
+            }
+            else if (dPlaying == true)
+            {
+                dBet();
+            }
+            else
+            {
+                if (prebet == true)
+                {
+                    DealHands();
+                }
+                else
+                {
+                    if (communityCards.Count() != 5)
+                    {
+                        Action();
+                    }
+                    else
+                    {
+                        EndRound();
+                    }
+                }
+            }
         }
         private void dBet()
         {
-            buttonCall.Enabled = false;
-            buttonRaise.Enabled = false;
-            buttonFold.Enabled = false;
-            buttonAllIn.Enabled = false;
             warned = false;
             buttonBet.Hide();
             textBoxBet.Hide();
             int action;
             int raise;
+            int bet = call;
             action = rand.Next(0, 4);
             raise = rand.Next(0, 11);
             if (prebet == true)
             {
-                if (action < 3)
+                if (dBank < call)
+                {
+                    buttonD.Text = " Blind ";
+                    bet = dBank;
+                    dPlaying = false;
+                }
+                else if (action < 3)
                 {
                     buttonD.Text = " Blind ";
                 }
@@ -494,59 +756,59 @@ namespace Felix_Lu_Digital_Outcome_2._8
                     call += raise * 5;
                     buttonD.Text = " Ante Up ";
                 }
-                dBank -= call;
-                pot += call;
-                textBoxPot.Text = $"{pot}";
-                labelDb.Text = $"{dBank}";
-                //System.Threading.Thread.Sleep(500);
-                //buttonA.Text = null;
-                //buttonB.Text = null;
-                //buttonD.Text = null;
-                //if (pPlaying == true)
-                //{
-                //    buttonP.Text = null;
-                //}
-                DealHands();
             }
             else
             {
                 if (dPlaying == true)
                 {
-                    if (action < 3)
+                    if (dBank < call)
                     {
-                        buttonD.Text = " Call ";
+                        buttonD.Text = " Blind ";
+                        bet = dBank;
+                        dPlaying = false;
+                    }
+                    else if (action < 3)
+                    {
+                        buttonD.Text = " Blind ";
                     }
                     else
                     {
                         call += raise * 10;
                         buttonD.Text = " Raise ";
                     }
-                    dBank -= call;
-                    pot += call;
-                    textBoxPot.Text = $"{pot}";
-                    labelDb.Text = $"{dBank}";
-                    textBoxCall.Text = $"{call}";
-                    if (communityCards.Count() == 5)
-                    {
-                        EndRound();
-                    }
-                    else
-                    {
-                        //System.Threading.Thread.Sleep(500);
-                        //buttonA.Text = null;
-                        //buttonB.Text = null;
-                        //buttonD.Text = null;
-                        //if (pPlaying == true)
-                        //{
-                        //    buttonP.Text = null;
-                        //}
-                        Action();
-                    }
+                }
+            }
+            dBank -= bet;
+            if (bet > call)
+            {
+                call = bet;
+            }
+            pot += bet;
+            textBoxPot.Text = $"{pot}";
+            labelDb.Text = $"${dBank}";
+            textBoxCall.Text = $"{call}";
+            if(prebet == true)
+            {
+                DealHands();
+            }
+            else
+            {
+                if (communityCards.Count() != 5)
+                {
+                    Action();
+                }
+                else
+                {
+                    EndRound();
                 }
             }
         }
         private void DealHands()
         {
+            buttonCall.Enabled = false;
+            buttonRaise.Enabled = false;
+            buttonFold.Enabled = false;
+            buttonAllIn.Enabled = false;
             prebet = false;
             call = MINBET;
             for (int i = 0; i < HOLECARDS; i++)
@@ -581,10 +843,32 @@ namespace Felix_Lu_Digital_Outcome_2._8
             bPlaying = true;
             dPlaying = true;
             //System.Threading.Thread.Sleep(500);
-            aBet();
+            if (aPlaying == true)
+            {
+                aBet();
+            }
+            else if (bPlaying == true)
+            {
+                bBet();
+            }
+            else if (pPlaying == true)
+            {
+                buttonCall.Enabled = true;
+                buttonRaise.Enabled = true;
+                buttonFold.Enabled = true;
+                buttonAllIn.Enabled = true;
+            }
+            else if (dPlaying == true)
+            {
+                dBet();
+            }
         }
         private void Action()
         {
+            buttonCall.Enabled = false;
+            buttonRaise.Enabled = false;
+            buttonFold.Enabled = false;
+            buttonAllIn.Enabled = false;
             if (pPlaying == true || aPlaying == true || bPlaying == true || dPlaying == true)
             {
                 //System.Threading.Thread.Sleep(1000);
@@ -618,12 +902,31 @@ namespace Felix_Lu_Digital_Outcome_2._8
                             pictureBoxC5.Image = imageListCards.Images[communityCards[4]];
                         }
                     }
-                    aBet();
                 }
-                else
+                if (aPlaying == true)
                 {
                     aBet();
                 }
+                else if (bPlaying == true)
+                {
+                    bBet();
+                }
+                else if (pPlaying  == true)
+                {
+                    buttonCall.Enabled = true;
+                    buttonRaise.Enabled = true;
+                    buttonFold.Enabled = true;
+                    buttonAllIn.Enabled = true;
+                }
+                else if (dPlaying == true)
+                {
+                    dBet();
+                }
+            }
+            else
+            {
+                MessageBox.Show("Everyone has forfeited their hand.\nA new round will begin.");
+                GameStart();
             }
         }
         private int Showdown(List<int> hand)
@@ -649,10 +952,13 @@ namespace Felix_Lu_Digital_Outcome_2._8
             int straightFlush = 0;
             int royalFlush = 0;
             int diamond = 0;
+            int cd = 0;
             int heart = 0;
+            int ch = 0;
             int club = 0;
+            int cc = 0;
             int spade = 0;
-            int sim = 1;
+            int cs = 0;
 
             consecutives.Clear();
             distinctCards.Clear();
@@ -703,8 +1009,7 @@ namespace Felix_Lu_Digital_Outcome_2._8
                     diffCards.Add(distinctCards[i]);
                     if (distinctCards[i] == values[0] || distinctCards[i] == values[1])
                     {
-                        diffCards[i] = 130 + (sim * 13);
-                        sim++;
+                        diffCards[i] = 130;
                     }
                 }
                 else
@@ -713,8 +1018,7 @@ namespace Felix_Lu_Digital_Outcome_2._8
                     diffCards.Add(distinctCards[i]);
                     if (distinctCards[i] == values[0] || distinctCards[i] == values[1])
                     {
-                        diffCards[i] = 130 + (sim * 13);
-                        sim++;
+                        diffCards[i] = 130;
                     }
                 }
             }
@@ -726,6 +1030,7 @@ namespace Felix_Lu_Digital_Outcome_2._8
                     if (!distinct.Add(i)) duplicate.Add(i);
                 }
             }
+
             cMax = distinctCards.Max();
             if (pMax > aMax && pMax > cMax)
             {
@@ -747,18 +1052,22 @@ namespace Felix_Lu_Digital_Outcome_2._8
                     if (i > 0 && i < 13)
                     {
                         diamond++;
+                        cd++;
                     }
                     if (i > 12 && i < 26)
                     {
                         heart++;
+                        ch++;
                     }
                     if (i > 25 && i < 39)
                     {
                         club++;
+                        cc++;
                     }
                     if (i > 38 && i < 52)
                     {
                         spade++;
+                        cs++;
                     }
                 }
                 if (hand[0] > 0 && hand[0] < 13 && hand[1] > 0 && hand[1] < 13)
@@ -944,15 +1253,15 @@ namespace Felix_Lu_Digital_Outcome_2._8
                     }
                     consecutives.Clear();
                 }
-                if (royalFlush != 0)
+                if (royalFlush != 0|| (diffCards.Count() == 5 && diffCards.Sum() == 45 && (cd == 5 || ch == 5 || cc == 5 || cs == 5)))
                 {
                     ranking = 11;
                 }
-                else if (straightFlush != 0)
+                else if (straightFlush != 0 || (diffCards.Count() == 5 && (diffCards.Max() - diffCards.Min() == 4) && (cd == 5 || ch == 5 || cc == 5 || cs == 5)))
                 {
                     ranking = 10;
                 }
-                else if (kindp == 4 || kindx == 6 || kindy == 6 || cLikes == 3)
+                else if (kindp == 4 || kindx == 6 || kindy == 6 || (cLikes == 3 && duplicate.Distinct().Count() == 1))
                 {
                     ranking = 9;
                 }
@@ -960,46 +1269,23 @@ namespace Felix_Lu_Digital_Outcome_2._8
                 {
                     ranking = 8;
                 }
-                else if ((kindx + cLikes == 4) || (kindy + cLikes == 4) || (kindx + cLikes == 5) || (kindy + cLikes == 5) || (kindp + cLikes == 4))
+                else if ((kindx + cLikes == 4 && duplicate.Distinct().Count() == 1) || (kindy + cLikes == 4 && duplicate.Distinct().Count() == 1) || (kindx + cLikes == 6 && duplicate.Distinct().Count() == 2) || (kindy + cLikes == 6 && duplicate.Distinct().Count() == 2) || (kindp + cLikes == 4 && duplicate.Distinct().Count() == 1) || (cLikes == 3 && duplicate.Distinct().Count() == 2))
                 {
-                    if (duplicate.Distinct().Count() == 1)
-                    {
-                        foreach (int i in duplicate)
-                        {
-                            if (i != values[0] && i != values[1])
-                            {
-                                ranking = 8;
-                            }
-                        }
-                    }
-                }
-                else if (cLikes == 3)
-                {
-                    if (duplicate.Distinct().Count() == 2)
-                    {
-                        ranking = 8;
-                    }
+                    ranking = 8;
                 }
                 else if (diamond >= 5 || heart >= 5 || club >= 5 || spade >= 5)
                 {
                     ranking = 7;
                 }
-                else if (consecutive != 0)
+                else if (consecutive != 0 || (diffCards.Distinct().Count() == 5 && diffCards.Max() - diffCards.Min() == 4) || (diffCards.Distinct().Count() == 5 && diffCards.Sum() == 45))
                 {
                     ranking = 6;
                 }
-                else if (kindp == 3 || kindx == 4 || kindy == 4)
+                else if (kindp == 3 || kindx == 4 || kindy == 4 || (cLikes == 2 && duplicate.Distinct().Count() == 1))
                 {
                     ranking = 5;
                 }
-                else if (cLikes == 2)
-                {
-                    if (duplicate.Distinct().Count() == 1)
-                    {
-                        ranking = 5;
-                    }
-                }
-                else if (kindx + kindy == 4 || kindx + cLikes == 3 || kindy + cLikes == 3 || kindp + cLikes == 3)
+                else if (kindx + kindy == 4 || kindx + cLikes == 3 || kindy + cLikes == 3 || kindp + cLikes == 3 || (cLikes == 2 && duplicate.Distinct().Count() == 2))
                 {
                     ranking = 4;
                 }
@@ -1016,6 +1302,8 @@ namespace Felix_Lu_Digital_Outcome_2._8
                     ranking = 1;
                 }
             }
+            duplicate.Clear();
+            distinct.Clear();
             return ranking;
         }
         private string FiveCardHand(int hand)
@@ -1067,22 +1355,338 @@ namespace Felix_Lu_Digital_Outcome_2._8
             }
             return ranking;
         }
+        private int Tie(int tied)
+        {
+            //Declare lists
+            List<int> values = new List<int>();
+            List<int> hand = new List<int>();
+            List<int> straight = new List<int>();
+            List<int> consecutive = new List<int>();
+            HashSet<int> dt = new HashSet<int>();
+            HashSet<int> dp = new HashSet<int>();
+            //Declare ints
+            int tie = players[tied];
+            int hx;
+            int hy = 0;
+            if (tied == 0)
+            {
+                foreach (int i in aH)
+                {
+                    hand.Add(i);
+                    if (i % 13 == 0)
+                    {
+                        values.Add(13);
+                    }
+                    else
+                    {
+                        values.Add(i%13);
+                    }
+                }
+            }
+            if (tied == 1)
+            {
+                foreach (int i in bH)
+                {
+                    hand.Add(i);
+                    if (i % 13 == 0)
+                    {
+                        values.Add(13);
+                    }
+                    else
+                    {
+                        values.Add(i%13);
+                    }
+                }
+            }
+            if (tied == 2)
+            {
+                foreach (int i in dH)
+                {
+                    hand.Add(i);
+                    if (i % 13 == 0)
+                    {
+                        values.Add(13);
+                    }
+                    else
+                    {
+                        values.Add(i%13);
+                    }
+                }
+            }
+            if (tied == 3)
+            {
+                foreach (int i in pH)
+                {
+                    hand.Add(i);
+                    if (i % 13 == 0)
+                    {
+                        values.Add(13);
+                    }
+                    else
+                    {
+                        values.Add(i%13);
+                    }
+                }
+            }
+            for (int i = 0; i < communityCards.Count(); i++)
+            {
+                if (communityCards[i] % 13 == 0)
+                {
+                    values.Add(13);
+                    hand.Add(communityCards[i]);
+                }
+                else
+                {
+                    values.Add(communityCards[i] % 13);
+                    hand.Add(communityCards[i]);
+                }
+            }
+
+            if (values.Count() - values.Distinct().Count() != 0)
+            {
+                foreach (int v in values)
+                {
+                    if (!dt.Add(v)) dp.Add(v);
+                }
+            }
+
+            if (tie == 10)
+            {
+                for (int a = 0; a < values.Count(); a++)
+                {
+                    straight.Add(hand[a]);
+                    for (int b = 0; b < values.Count(); b++)
+                    {
+                        straight.Add(hand[b]);
+                        for (int c = 0; c < values.Count(); c++)
+                        {
+                            straight.Add(hand[c]);
+                            for (int d = 0; d < values.Count(); d++)
+                            {
+                                straight.Add(hand[d]);
+                                for (int e = 0; e < values.Count(); e++)
+                                {
+                                    straight.Add(hand[e]);
+                                    if (straight.Distinct().Count() == 5)
+                                    {
+                                        if (straight.Max() - straight.Min() == 4)
+                                        {
+                                            if (straight.Max() != 12 || straight.Max() != 25 || straight.Max() != 38 || straight.Max() != 51)
+                                            {
+                                                if (straight.Min() != 0 || straight.Min() != 13 || straight.Min() != 26 || straight.Min() != 39)
+                                                {
+                                                    hx = straight.Max();
+                                                    if (hx > hy)
+                                                    {
+                                                        hy = hx;
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                    straight.Remove(hand[e]);
+                                }
+                                straight.Remove(hand[d]);
+                            }
+                            straight.Remove(hand[c]);
+                        }
+                        straight.Remove(hand[b]);
+                    }
+                    straight.Remove(hand[a]);
+                }
+            }
+            else if (tie == 9)
+            {
+                if (values.Distinct().Count() == 4)
+                {
+                    if(dp.Distinct().Count() == 1)
+                    {
+                        hy = dp.Max();
+                    }
+                }
+                else if (values.Distinct().Count() == 3)
+                {
+                    if (dp.Distinct().Count() == 2)
+                    {
+                        hy = dp.Max();
+                    }
+                }
+            }
+            else if (tie == 8)
+            {
+                if (values.Distinct().Count() == 4)
+                {
+                    if (dp.Distinct().Count() == 2)
+                    {
+                        hy = dp.Max() + dp.Min();
+                    }
+                }
+                else if (values.Distinct().Count() == 3)
+                {
+                    if (dp.Distinct().Count() == 3)
+                    {
+                        hy = dp.Distinct().Sum() - dp.Min();
+                    }
+                }
+            }
+            else if (tie == 7)
+            {
+                for (int a = 0; a < values.Count(); a++)
+                {
+                    straight.Add(hand[a]);
+                    for (int b = 0; b < values.Count(); b++)
+                    {
+                        straight.Add(hand[b]);
+                        for (int c = 0; c < values.Count(); c++)
+                        {
+                            straight.Add(hand[c]);
+                            for (int d = 0; d < values.Count(); d++)
+                            {
+                                straight.Add(hand[d]);
+                                for (int e = 0; e < values.Count(); e++)
+                                {
+                                    straight.Add(hand[e]);
+                                    if (straight.Distinct().Count() == 5)
+                                    {
+                                        if ((straight.Sum() > 9 && straight.Sum() < 51) || (straight.Sum() > 74 && straight.Sum() < 116) || (straight.Sum() > 139 && straight.Sum() < 181) || (straight.Sum() > 204 && straight.Sum() < 246))
+                                        {
+                                            hx = straight.Max() % 13;
+                                            if (straight.Max() % 13 == 0)
+                                            {
+                                                hx = 13;
+                                            }
+                                            if (hx > hy)
+                                            {
+                                                hy = hx;
+                                            }
+                                        }
+                                    }
+                                    straight.Remove(hand[e]);
+                                }
+                                straight.Remove(hand[d]);
+                            }
+                            straight.Remove(hand[c]);
+                        }
+                        straight.Remove(hand[b]);
+                    }
+                    straight.Remove(hand[a]);
+                }
+            }
+            else if (tie == 6)
+            {
+                for (int a = 0; a < values.Count(); a++)
+                {
+                    consecutive.Add(values[a]);
+                    for (int b = 0; b < values.Count(); b++)
+                    {
+                        consecutive.Add(values[b]);
+                        for (int c = 0; c < values.Count(); c++)
+                        {
+                            consecutive.Add(values[c]);
+                            for (int d = 0; d < values.Count(); d++)
+                            {
+                                consecutive.Add(values[d]);
+                                for (int e = 0; e < values.Count(); e++)
+                                {
+                                    consecutive.Add(values[e]);
+                                    if (consecutive.Distinct().Count() == 5)
+                                    {
+                                        if (consecutive.Max() - consecutive.Min() == 4)
+                                        {
+                                            hx = consecutive.Max();
+                                            if (hx > hy)
+                                            {
+                                                hy = hx;
+                                            }
+                                        }
+                                        else if (consecutive.Max() == 12 && consecutive.Min() == 0)
+                                        {
+                                            if (consecutive.Sum() == 44)
+                                            {
+                                                hx = consecutive.Max();
+                                                if (hx > hy)
+                                                {
+                                                    hy = hx;
+                                                }
+                                            }
+                                        }
+                                    }
+                                    consecutive.Remove(values[e]);
+                                }
+                                consecutive.Remove(values[d]);
+                            }
+                            consecutive.Remove(values[c]);
+                        }
+                        consecutive.Remove(values[b]);
+                    }
+                    consecutive.Remove(values[a]);
+                }
+            }
+            else if (tie == 5)
+            {
+                if (values.Distinct().Count() == 5)
+                {
+                    if (dp.Distinct().Count() == 1)
+                    {
+                        hy = dp.Max();
+                    }
+                }
+                else if (values.Distinct().Count() == 3)
+                {
+                    if (dp.Distinct().Count() == 2)
+                    {
+                        hy = dp.Max();
+                    }
+                }
+            }
+            else if (tie == 4)
+            {
+                if (values.Distinct().Count() == 5)
+                {
+                    if (dp.Distinct().Count() == 2)
+                    {
+                        hy = dp.Max() + dp.Min();
+                    }
+                }
+                else if (values.Distinct().Count() == 4)
+                {
+                    if (dp.Distinct().Count() == 3)
+                    {
+                        hy = dp.Distinct().Sum() - dp.Min();
+                    }
+                }
+            }
+            else if (tie == 3)
+            {
+                if (values.Distinct().Count() == 6)
+                {
+                    if (dp.Distinct().Count() == 1)
+                    {
+                        hy = dp.Max();
+                    }
+                }
+                else if (values.Distinct().Count() == 5)
+                {
+                    if (dp.Distinct().Count() == 2)
+                    {
+                        hy = dp.Max();
+                    }
+                }
+                else if (values.Distinct().Count() == 4)
+                {
+                    if (dp.Distinct().Count() == 3)
+                    {
+                        hy = dp.Max();
+                    }
+                }
+            }
+            return hy;
+        }
         private void EndRound()
         {
             //Declare lists
-            List<int> players = new List<int>();
-            List<int> playerTie = new List<int>();
-            List<int> tied = new List<int>();
             List<string> hand = new List<string>();
             //Declare Variables
-            //int aRank = 0;
-            //int bRank = 0;
-            //int dRank = 0;
-            //int pRank = 0;
-            //string aHand;
-            //string bHand;
-            //string dHand;
-            //string pHand;
             int tie = 0;
             if (communityCards.Count() == 5)
             {
@@ -1106,67 +1710,238 @@ namespace Felix_Lu_Digital_Outcome_2._8
                     {
                         hand.Add(FiveCardHand(i));
                     }
-                    buttonA.Text = hand[0];
-                    buttonB.Text = hand[1];
-                    buttonD.Text = hand[2];
-                    buttonP.Text = hand[3];
+                    buttonA.Text = $" {hand[0]} ";
+                    buttonB.Text = $" {hand[1]} ";
+                    buttonD.Text = $" {hand[2]} ";
+                    buttonP.Text = $" {hand[3]} ";
                     for (int t = 0; t < players.Count(); t++)
                     {
+                        playerTie.Add(Tie(t));
                         if (players[t] == players.Max())
                         {
                             tie += 1;
-                            tied.Add(t);
                         }
                     }
-                    foreach (int i in tied)
+                    if (players.Last() != players.Max())
+                        //One of the other players won.
                     {
-                        if (i == 0)
+                        MessageBox.Show($"You Lost to a " + hand[players.IndexOf(players.Max())] + '.');
+                        if (players.Max() == players[0])
                         {
-                            aBank += pot / tie;
+                            if (players[0] == players[1] || players[0] == players[2])
+                            {
+                                if (playerTie[0] == playerTie[1] || playerTie[0] == playerTie[2])
+                                {
+                                    aBank += pot / tie;
+                                }
+                                else
+                                {
+                                    aBank += pot;
+                                }
+                            }
+                            else
+                            {
+                                aBank += pot;
+                            }
                         }
-                        if (i == 1)
+                        if (players.Max() == players[1])
                         {
-                            bBank += pot / tie;
+                            if (players[1] == players[0] || players[1] == players[2])
+                            {
+                                if (playerTie[1] == playerTie[0] || playerTie[1] == playerTie[2])
+                                {
+                                    bBank += pot / tie;
+                                }
+                                else
+                                {
+                                    bBank += pot;
+                                }
+                            }
+                            else
+                            {
+                                bBank += pot;
+                            }
                         }
-                        if (i == 2)
+                        if (players.Max() == players[2])
                         {
-                            dBank += pot / tie;
+                            if (players[2] == players[0] || players[2] == players[1])
+                            {
+                                if (playerTie[2] == playerTie[0] || playerTie[2] == playerTie[1])
+                                {
+                                    dBank += pot / tie;
+                                }
+                                else
+                                {
+                                    dBank += pot;
+                                }
+                            }
+                            else
+                            {
+                                dBank += pot;
+                            }
                         }
-                        if (i == 3)
-                        {
-                            pBank += pot / tie;
-                        }
-                    }
-                    if (tied.Last() != 3)
-                    {
-                        MessageBox.Show($"You Lost to a " + hand[tied.First()] + '.');
                     }
                     else
                     {
-                        if (tied.Count() == 1)
+                        if (players[0] != players.Max() && players[1] != players.Max() && players[2] != players.Max())
+                            //You possess the higher hand.
                         {
                             MessageBox.Show($"You win with a " + hand[3] + '.');
+                            pBank += pot;
                         }
                         else
                         {
-                            MessageBox.Show($"You drew with a " + hand[3] + '.');
+                            if (playerTie.Max() == playerTie[3])
+                                //If there is a draw between hands.
+                            {
+                                if(playerTie[0] != playerTie.Max() && playerTie[1] != playerTie.Max() && playerTie[2] != playerTie.Max())
+                                    //You possess the greater hand.
+                                {
+                                    MessageBox.Show($"You win with a higher " + hand[3] + '.');
+                                    pBank += pot;
+                                }
+                                else/* if (playerTie[3] == playerTie[0] || playerTie[3] == playerTie[1] || playerTie[3] == playerTie[2])*/
+                                    //You have the same hand as another
+                                {
+                                    MessageBox.Show($"You drew with a " + hand[3] + '!');
+                                    pBank += pot / tie;
+                                    if (playerTie.Max() == playerTie[0])
+                                    {
+                                        aBank += pot / tie;
+                                    }
+                                    if (playerTie.Max() == playerTie[1])
+                                    {
+                                        bBank += pot / tie;
+                                    }
+                                    if (playerTie.Max() == playerTie[2])
+                                    {
+                                        dBank += pot / tie;
+                                    }  
+                                }
+                            }
+                            else
+                                //Your hand is lesser than theirs.
+                            {
+                                MessageBox.Show($"You Lost to a higher " + hand[players.IndexOf(players.Max())] + '.');
+                                if (playerTie.Max() == playerTie[0])
+                                {
+                                    if (playerTie[0] == playerTie[1] || playerTie[0] == playerTie[2])
+                                    {
+                                        aBank += pot/tie;
+                                    }
+                                    else
+                                    {
+                                        aBank += pot;
+                                    }
+                                }
+                                if (playerTie.Max() == playerTie[1])
+                                {
+                                    if (playerTie[1] == playerTie[0] || playerTie[1] == playerTie[2])
+                                    {
+                                        bBank += pot / tie;
+                                    }
+                                    else
+                                    {
+                                        bBank += pot;
+                                    }
+                                }
+                                if (playerTie.Max() == playerTie[2])
+                                {
+                                    if (playerTie[2] == playerTie[0] || playerTie[2] == playerTie[1])
+                                    {
+                                        dBank += pot / tie;
+                                    }
+                                    else
+                                    {
+                                        dBank += pot;
+                                    }
+                                }
+                            }
                         }
                     }
+                    labelP.Text = $"${pBank}";
+                    fact = rand.Next(0, facts.Count());
+                    MessageBox.Show($"{facts[fact]}\n\nthefactsite.com");
                     GameStart();
                 }
                 else
                 {
-                    //aRank = Showdown(aH);
-                    //bRank = Showdown(bH);
-                    //dRank = Showdown(dH);
-                    //aHand = FiveCardHand(aRank);
-                    //bHand = FiveCardHand(bRank);
-                    //dHand = FiveCardHand(dRank);
-                    //buttonA.Text = $"{aHand}";
-                    //buttonB.Text = $"{bHand}";
-                    //buttonD.Text = $"{dHand}";
-                    buttonP.Text = $"Fold";
-                    MessageBox.Show("You have discarded your hand.\n" + "The opponent has a " /*+ aHand*/);
+                    buttonP.Text = $" Fold ";
+                    players.Add(Showdown(aH));
+                    players.Add(Showdown(bH));
+                    players.Add(Showdown(dH));
+                    foreach (int i in players)
+                    {
+                        hand.Add(FiveCardHand(i));
+                    }
+                    buttonA.Text = $" {hand[0]} ";
+                    buttonB.Text = $" {hand[1]} ";
+                    buttonD.Text = $" {hand[2]} ";
+                    for (int t = 0; t < players.Count(); t++)
+                    {
+                        playerTie.Add(Tie(t));
+                        if (players[t] == players.Max())
+                        {
+                            tie += 1;
+                        }
+                    }
+                    if (players.Max() == players[0])
+                    {
+                        if (players[0] == players[1] || players[0] == players[2])
+                        {
+                            if (playerTie[0] == playerTie[1] || playerTie[0] == playerTie[2])
+                            {
+                                aBank += pot / tie;
+                            }
+                            else
+                            {
+                                aBank += pot;
+                            }
+                        }
+                        else
+                        {
+                            aBank += pot;
+                        }
+                    }
+                    if (players.Max() == players[1])
+                    {
+                        if (players[1] == players[0] || players[1] == players[2])
+                        {
+                            if (playerTie[1] == playerTie[0] || playerTie[1] == playerTie[2])
+                            {
+                                bBank += pot / tie;
+                            }
+                            else
+                            {
+                                bBank += pot;
+                            }
+                        }
+                        else
+                        {
+                            bBank += pot;
+                        }
+                    }
+                    if (players.Max() == players[2])
+                    {
+                        if (players[2] == players[0] || players[2] == players[1])
+                        {
+                            if (playerTie[2] == playerTie[0] || playerTie[2] == playerTie[1])
+                            {
+                                dBank += pot / tie;
+                            }
+                            else
+                            {
+                                dBank += pot;
+                            }
+                        }
+                        else
+                        {
+                            dBank += pot;
+                        }
+                    }
+                    MessageBox.Show("You have discarded your hand.\n" + "The opponent has a " + hand[players.IndexOf(players.Max())]);
+                    fact = rand.Next(0, facts.Count());
+                    MessageBox.Show($"{facts[fact]}\n\nthefactsite.com");
                     GameStart();
                 }
             }

@@ -75,6 +75,7 @@
             this.textBoxName = new System.Windows.Forms.TextBox();
             this.labelName = new System.Windows.Forms.Label();
             this.buttonName = new System.Windows.Forms.Button();
+            this.labelN = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxC1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxC2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxC3)).BeginInit();
@@ -218,9 +219,9 @@
             // pictureBoxP1
             // 
             this.pictureBoxP1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxP1.Image")));
-            this.pictureBoxP1.Location = new System.Drawing.Point(-17, 791);
+            this.pictureBoxP1.Location = new System.Drawing.Point(-20, 773);
             this.pictureBoxP1.Name = "pictureBoxP1";
-            this.pictureBoxP1.Size = new System.Drawing.Size(210, 193);
+            this.pictureBoxP1.Size = new System.Drawing.Size(231, 211);
             this.pictureBoxP1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBoxP1.TabIndex = 14;
             this.pictureBoxP1.TabStop = false;
@@ -228,9 +229,9 @@
             // pictureBoxP2
             // 
             this.pictureBoxP2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxP2.Image")));
-            this.pictureBoxP2.Location = new System.Drawing.Point(163, 791);
+            this.pictureBoxP2.Location = new System.Drawing.Point(177, 773);
             this.pictureBoxP2.Name = "pictureBoxP2";
-            this.pictureBoxP2.Size = new System.Drawing.Size(210, 193);
+            this.pictureBoxP2.Size = new System.Drawing.Size(232, 211);
             this.pictureBoxP2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBoxP2.TabIndex = 15;
             this.pictureBoxP2.TabStop = false;
@@ -300,7 +301,7 @@
             this.buttonBlind.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.buttonBlind.Font = new System.Drawing.Font("Modern No. 20", 24F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonBlind.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.buttonBlind.Location = new System.Drawing.Point(12, 990);
+            this.buttonBlind.Location = new System.Drawing.Point(13, 990);
             this.buttonBlind.Name = "buttonBlind";
             this.buttonBlind.Size = new System.Drawing.Size(366, 63);
             this.buttonBlind.TabIndex = 24;
@@ -313,7 +314,7 @@
             this.buttonAnteUp.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.buttonAnteUp.Font = new System.Drawing.Font("Modern No. 20", 24F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonAnteUp.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.buttonAnteUp.Location = new System.Drawing.Point(384, 990);
+            this.buttonAnteUp.Location = new System.Drawing.Point(385, 990);
             this.buttonAnteUp.Name = "buttonAnteUp";
             this.buttonAnteUp.Size = new System.Drawing.Size(366, 63);
             this.buttonAnteUp.TabIndex = 25;
@@ -342,6 +343,7 @@
             // 
             this.textBoxPot.Location = new System.Drawing.Point(991, 343);
             this.textBoxPot.Name = "textBoxPot";
+            this.textBoxPot.ReadOnly = true;
             this.textBoxPot.Size = new System.Drawing.Size(100, 22);
             this.textBoxPot.TabIndex = 28;
             // 
@@ -480,11 +482,11 @@
             this.labelP.BackColor = System.Drawing.Color.Transparent;
             this.labelP.Font = new System.Drawing.Font("DejaVu Sans Condensed", 19.8F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelP.ForeColor = System.Drawing.Color.White;
-            this.labelP.Location = new System.Drawing.Point(379, 902);
+            this.labelP.Location = new System.Drawing.Point(385, 898);
             this.labelP.Name = "labelP";
-            this.labelP.Size = new System.Drawing.Size(119, 39);
+            this.labelP.Size = new System.Drawing.Size(67, 39);
             this.labelP.TabIndex = 35;
-            this.labelP.Text = "label1";
+            this.labelP.Text = "     ";
             this.labelP.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // labelDb
@@ -560,7 +562,7 @@
             this.buttonP.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.buttonP.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.buttonP.Font = new System.Drawing.Font("Modern No. 20", 13.8F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonP.Location = new System.Drawing.Point(379, 849);
+            this.buttonP.Location = new System.Drawing.Point(385, 845);
             this.buttonP.Name = "buttonP";
             this.buttonP.Size = new System.Drawing.Size(218, 50);
             this.buttonP.TabIndex = 24;
@@ -633,6 +635,18 @@
             this.buttonName.UseVisualStyleBackColor = true;
             this.buttonName.Click += new System.EventHandler(this.buttonName_Click);
             // 
+            // labelN
+            // 
+            this.labelN.BackColor = System.Drawing.Color.Transparent;
+            this.labelN.Font = new System.Drawing.Font("DejaVu Sans Condensed", 25.8F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelN.ForeColor = System.Drawing.Color.White;
+            this.labelN.Location = new System.Drawing.Point(382, 932);
+            this.labelN.Name = "labelN";
+            this.labelN.Size = new System.Drawing.Size(221, 52);
+            this.labelN.TabIndex = 48;
+            this.labelN.Text = "      ";
+            this.labelN.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
             // Game
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -640,6 +654,7 @@
             this.BackColor = System.Drawing.Color.Green;
             this.ClientSize = new System.Drawing.Size(1942, 1102);
             this.ControlBox = false;
+            this.Controls.Add(this.labelN);
             this.Controls.Add(this.buttonName);
             this.Controls.Add(this.labelName);
             this.Controls.Add(this.textBoxName);
@@ -755,5 +770,6 @@
         private System.Windows.Forms.TextBox textBoxName;
         private System.Windows.Forms.Label labelName;
         private System.Windows.Forms.Button buttonName;
+        private System.Windows.Forms.Label labelN;
     }
 }
